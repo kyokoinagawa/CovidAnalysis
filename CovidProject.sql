@@ -143,7 +143,7 @@ group by location, population
 select * from HighestInfectionCount
 
 Create View CasesVsDeathsInJapan as
-select location, date, total_cases, total_deaths, (total_deaths/total_cases)*100 as DeathPercentage
+select sum(new_cases) as total_cases, sum(cast(new_deaths as int)) as total_deaths, sum(cast(new_deaths as int))/sum(new_cases)*100 as DeathPercentage-- total_deaths, (total_deaths/total_cases)*100 as DeathPercentage
 from PortfolioProject..CovidDeaths
 where location like '%japan%'
 
