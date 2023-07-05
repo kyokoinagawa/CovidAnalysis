@@ -142,7 +142,18 @@ join sars_2003_complete_dataset sdeaths
 on cdeaths.location = sdeaths.location
 group by cdeaths.location
 order by SARSDeaths desc
+  
 
+--Covid and SARS Infection Rate Comparison
+  
+select ccases.location, MAX(ccases.total_cases) as CovidCases, MAX([Cumulative number of case(s)]) as SARSCases
+from CovidDeaths ccases
+join sars_2003_complete_dataset scases
+on ccases.location = scases.location
+group by ccases.location
+order by SARSCases desc
+  
+  
 --Covid Death Percentage
 
 select SUM(new_cases) as total_cases, SUM(cast(new_deaths as int)) as total_deaths, SUM(cast(new_deaths as int))/SUM(new_cases) *100 as CovidDeathPercentage
